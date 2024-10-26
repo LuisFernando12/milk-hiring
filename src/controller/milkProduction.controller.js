@@ -52,8 +52,10 @@ const getAllMilkProductionsByFarmAndMonth = async (req, res) => {
         const milkProductionResult = await milkProductionModel.getMilkProductionsByFarmId(farmId);
 
         const milkProductionFilterByDay = {};
+        const fullYear = String(new Date().getFullYear());
         milkProductionResult.forEach(milkProduction => {
-            if (milkProduction.date.split(',')[0].split('/')[1] === month) {
+            const date = milkProduction.date.split(',')[0].split('/');
+            if (date[1] === month && date[2] === fullYear) {
                 const date = milkProduction.date.split(',')[0];
                 if (!milkProductionFilterByDay[date]) {
                     milkProductionFilterByDay[date] = {
@@ -93,10 +95,18 @@ const getPricePaidToFarmerByFarmAndMonth = async (req, res) => {
         }
         const milkProductionsDB = await milkProductionModel.getMilkProductionsByFarmId(farmId);
 
-        const milkProductionsByFarm = milkProductionsDB.filter((milkProduction) => milkProduction.date.split(',')[0].split('/')[1] === month);
+        const fullYear = String(new Date().getFullYear());
+        const milkProductionsByFarm = milkProductionsDB.filter((milkProduction) => {
+            const date = milkProduction.date.split(',')[0].split('/');
+            if(date[1] === month && date[2] === fullYear){
+                return milkProduction
+            }
+        });
         const totalQuatityMilkProductions = milkProductionsByFarm.reduce((total, milkProduction) => total + milkProduction.quantity, 0);
 
+
         const price = milkLiterPrice(totalQuatityMilkProductions, milkProductionsDB[0].distanceFarmToFactory);
+        const pricePerLiter = (price / totalQuatityMilkProductions)||0;
 
         return res.json(
             {
@@ -106,8 +116,8 @@ const getPricePaidToFarmerByFarmAndMonth = async (req, res) => {
                     br: Intl.NumberFormat('pt-br', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(price),
                 },
                 pricePerLiter: {
-                    en: Intl.NumberFormat('en', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(price / totalQuatityMilkProductions),
-                    br: Intl.NumberFormat('pt', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(price / totalQuatityMilkProductions),
+                    en: Intl.NumberFormat('en', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(pricePerLiter),
+                    br: Intl.NumberFormat('pt', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(pricePerLiter),
                 }
             }
         );

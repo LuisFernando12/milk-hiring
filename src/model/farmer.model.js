@@ -2,22 +2,6 @@ import { BadRequestError, ConflictError, InternalServerError, NotFoundError } fr
 import { connect, close } from "../config/database/index.js";
 import { ObjectId } from "mongodb";
 
-const FarmerSchema = Object.freeze({
-    name: '',
-    birthDate: '',
-    documentNumber: '',
-    address: {
-        cep: '',
-        street: '',
-        number: '',
-        neighborhood: '',
-        city: '',
-        state: ''
-    },
-    phone: '',
-    email: ''
-});
-
 const createFarmer = async (farmer) => {
     try {
         const db = await connect();
@@ -107,9 +91,9 @@ const deleteFarmer = async (id) => {
             throw NotFoundError('Farmer not found');
         }
         const collectionFarm = db.collection('farms');
-        const farmDB = await collectionFarm.findOne({ farmerId: id });
-        if (farmDB) {
-            throw ConflictError('Farmer has farms');
+        const farmDB = await collectionFarm.find({ farmerId: id }).toArray();
+        if (farmDB.length > 0) {
+            throw ConflictError('Farmer has farms, cannot be deleted');
         }
         const farmerDelete = await collectionFarmer.deleteOne({ _id: objectId });
         if (!farmerDelete.deletedCount) {

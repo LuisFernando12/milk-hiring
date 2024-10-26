@@ -1,4 +1,7 @@
 export default (amountMilkInLiters, distanceInKM, month ) => {
+    if(amountMilkInLiters === 0 || distanceInKM === 0){
+        return 0;
+    }
     if (!amountMilkInLiters || !distanceInKM) {
         throw new Error('amountMilkInLiters and distanceInKM are required');
     }

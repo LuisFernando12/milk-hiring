@@ -1,0 +1,1276 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Milk Hiring",
+        "version": "1.0.0",
+        "description": "API para gestão de fazendas e produção de leite"
+    },
+    "tags": [
+        {
+            "name": "Farmer Management",
+            "description": "Operações relacionadas à gestão de fazendas."
+        },
+        {
+            "name": "Farm Management",
+            "description": "Operações relacionadas à gestão de fazendas."
+        },
+        {
+            "name": "Milk Production Management",
+            "description": "Operações relacionadas à produção de leite."
+        }
+    ],
+    "servers": [
+        {
+            "url": "http://localhost:3001",
+            "description": "Servidor local"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Farmer": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "671d4f77e17ad949a20ffbb0"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "João"
+                    },
+                    "birthDate": {
+                        "type": "string",
+                        "example": "1990-01-01"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string",
+                                "example": "Rua 1"
+                            },
+                            "number": {
+                                "type": "string",
+                                "example": "123"
+                            },
+                            "city": {
+                                "type": "string",
+                                "example": "Cidade 1"
+                            },
+                            "state": {
+                                "type": "string",
+                                "example": "Estado 1"
+                            },
+                            "neighborhood": {
+                                "type": "string",
+                                "example": "Bairro 1"
+                            },
+                            "cep": {
+                                "type": "string",
+                                "example": "12345678"
+                            }
+                        }
+                    },
+                    "documentNumber": {
+                        "type": "string",
+                        "example": "11122233344"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "11970707070"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "joao@example.com"
+                    }
+                }
+            },
+            "FarmerInput": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "João"
+                    },
+                    "documentNumber": {
+                        "type": "string",
+                        "example": "11122233344"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "joao@example.com"
+                    },
+                    "birthDate": {
+                        "type": "string",
+                        "example": "1990-01-01"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "11970707070"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string",
+                                "example": "Rua 1"
+                            },
+                            "number": {
+                                "type": "string",
+                                "example": "123"
+                            },
+                            "city": {
+                                "type": "string",
+                                "example": "Cidade 1"
+                            },
+                            "state": {
+                                "type": "string",
+                                "example": "Estado 1"
+                            },
+                            "neighborhood": {
+                                "type": "string",
+                                "example": "Bairro 1"
+                            },
+                            "cep": {
+                                "type": "string",
+                                "example": "12345678"
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "name",
+                    "documentNumber",
+                    "email",
+                    "birthDate",
+                    "phone",
+                    "address"
+                ]
+            },
+            "Farm": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "671d4f77e17ad949a20ffbb0"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Fazenda 1"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string",
+                                "example": "Rua 1"
+                            },
+                            "number": {
+                                "type": "string",
+                                "example": "123"
+                            },
+                            "city": {
+                                "type": "string",
+                                "example": "Cidade 1"
+                            },
+                            "state": {
+                                "type": "string",
+                                "example": "Estado 1"
+                            },
+                            "neighborhood": {
+                                "type": "string",
+                                "example": "Bairro 1"
+                            },
+                            "cep": {
+                                "type": "string",
+                                "example": "12345678"
+                            }
+                        }
+                    },
+                    "distanceFarmToFactory": {
+                        "type": "number",
+                        "example": 10
+                    },
+                    "farmer": {
+                        "$ref": "#/components/schemas/Farmer"
+                    }
+                }
+            },
+            "FarmInput": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fazenda 1"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string",
+                                "example": "Rua 1"
+                            },
+                            "number": {
+                                "type": "string",
+                                "example": "123"
+                            },
+                            "city": {
+                                "type": "string",
+                                "example": "Cidade 1"
+                            },
+                            "state": {
+                                "type": "string",
+                                "example": "Estado 1"
+                            },
+                            "neighborhood": {
+                                "type": "string",
+                                "example": "Bairro 1"
+                            },
+                            "cep": {
+                                "type": "string",
+                                "example": "12345678"
+                            }
+                        }
+                    },
+                    "distanceFarmToFactory": {
+                        "type": "number",
+                        "example": 10
+                    },
+                    "farmerId": {
+                        "type": "string",
+                        "example": "671d4f77e17ad949a20ffbb0"
+                    }
+                },
+                "required": [
+                    "name",
+                    "address",
+                    "distanceFarmToFactory",
+                    "farmerId"
+                ]
+            },
+            "MilkProduction": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "671d4f77e17ad949a20ffbb0"
+                    },
+                    "date": {
+                        "type": "string",
+                        "example": "2022-01-01"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "example": 10
+                    },
+                    "farm": {
+                        "$ref": "#/components/schemas/Farm"
+                    }
+                }
+            },
+            "MilkProductionInput": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "example": "2022-01-01T00:00:00.000Z"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "example": 10
+                    },
+                    "farmId": {
+                        "type": "string",
+                        "example": "671d4f77e17ad949a20ffbb0"
+                    }
+                },
+                "required": [
+                    "date",
+                    "quantity",
+                    "farmId"
+                ]
+            },
+            "MilkProductionEntry": {
+                "type": "object",
+                "properties": {
+                    "entryTimes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "2022-01-01T00:00:00.000Z"
+                        },
+                        "example": [
+                            "2022-01-01T00:00:00.000Z",
+                            "2022-01-02T00:00:00.000Z",
+                            "2022-01-03T00:00:00.000Z"
+                        ]
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "example": 10
+                    },
+                    "totalMonthly": {
+                        "type": "number",
+                        "example": 10
+                    },
+                    "median": {
+                        "type": "number",
+                        "example": 10
+                    }
+                }
+            },
+            "MilkProductionPricePaidToFarmerByYear": {
+                "type": "object",
+                "properties": {
+                    "{month}": {
+                        "type": "object",
+                        "properties": {
+                            "quantity": {
+                                "type": "number",
+                                "example": 10
+                            },
+                            "monthPrice": {
+                                "type": "object",
+                                "properties": {
+                                    "en": {
+                                        "type": "string",
+                                        "example": "1,00"
+                                    },
+                                    "br": {
+                                        "type": "string",
+                                        "example": "1,00"
+                                    }
+                                }
+                            },
+                            "pricePerLiter": {
+                                "type": "object",
+                                "properties": {
+                                    "en": {
+                                        "type": "string",
+                                        "example": "1,00"
+                                    },
+                                    "br": {
+                                        "type": "string",
+                                        "example": "1,00"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "MilkProductionPricePaidToFarmerByMonth": {
+                "type": "object",
+                "properties": {
+                    "totalLitersMilk": {
+                        "type": "number",
+                        "example": 10
+                    },
+                    "monthPrice": {
+                        "type": "object",
+                        "properties": {
+                            "en": {
+                                "type": "string",
+                                "example": "1,00"
+                            },
+                            "br": {
+                                "type": "string",
+                                "example": "1,00"
+                            }
+                        }
+                    },
+                    "pricePerLiter": {
+                        "type": "object",
+                        "properties": {
+                            "en": {
+                                "type": "string",
+                                "example": "1,00"
+                            },
+                            "br": {
+                                "type": "string",
+                                "example": "1,00"
+                            }
+                        }
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": "Erro"
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/farmer": {
+            "get": {
+                "tags": [
+                    "Farmer Management"
+                ],
+                "summary": "Listar fazendeiros",
+                "responses": {
+                    "200": {
+                        "description": "Uma lista de fazendeiros",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Farmer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Farmer Management"
+                ],
+                "summary": "Criar um novo fazendeiro",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FarmerInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Fazendeiro criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Farmer"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Fazendeiro existente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/farmer/{id}": {
+            "get": {
+                "tags": [
+                    "Farmer Management"
+                ],
+                "summary": "Obter Fazendeiro por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Fazendeiro encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Farmer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Fazendeiro não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Farmer Management"
+                ],
+                "summary": "Atualizar Fazendeiro por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FarmerInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Fazendeiro atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Farmer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Fazendeiro não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Farmer Management"
+                ],
+                "summary": "Deletar Fazendeiro por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Fazendeiro deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Fazendeiro não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Fazendeiro tem fazenda associada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/farm": {
+            "get": {
+                "tags": [
+                    "Farm Management"
+                ],
+                "summary": "Listar fazendas",
+                "responses": {
+                    "200": {
+                        "description": "Uma lista de fazendas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Farm"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Farm Management"
+                ],
+                "summary": "Criar uma nova fazenda",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FarmInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Fazenda craiada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Farm"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Fazenda existente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/farm/{id}": {
+            "get": {
+                "tags": [
+                    "Farm Management"
+                ],
+                "summary": "Obter Fazenda por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Fazenda encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Farm"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Fazenda não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Farm Management"
+                ],
+                "summary": "Atualizar Fazenda por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FarmInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Fazenda atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Farm"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Fazenda não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Farm Management"
+                ],
+                "summary": "Deletar Fazenda por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Fazenda deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Fazenda não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Fazenda tem produção associada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/milk-production": {
+            "post": {
+                "tags": [
+                    "Milk Production Management"
+                ],
+                "summary": "Adicionar uma nova produção de leite",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MilkProductionInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produção craiada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/MilkProduction"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Fazenda existente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/milk-production/{id}": {
+            "get": {
+                "tags": [
+                    "Milk Production Management"
+                ],
+                "summary": "Obter Produção de Leite por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produção de leite encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MilkProduction"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Fazenda não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Milk Production Management"
+                ],
+                "summary": "Atualizar Fazenda por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MilkProductionInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Fazenda atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MilkProduction"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Fazenda não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Milk Production Management"
+                ],
+                "summary": "Deletar Produção de Leite por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Produção de Leite deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Produção de Leite não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/milk-production/farm/{farmId}/month/{month}": {
+            "get": {
+                "tags": [
+                    "Milk Production Management"
+                ],
+                "summary": "Obter Produção de Leite Mensal de uma Fazenda",
+                "parameters": [
+                    {
+                        "name": "farmId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "month",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produção de leite encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MilkProductionEntry"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Fazenda não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/milk-production/farm/{farmId}/month/{month}/price": {
+            "get": {
+                "tags": [
+                    "Milk Production Management"
+                ],
+                "summary": "Obter Valores de Produção de Leite por Ano de uma Fazenda",
+                "parameters": [
+                    {
+                        "name": "farmId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "month",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produção de leite encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MilkProductionPricePaidToFarmerByMonth"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Fazenda não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/milk-production/farm/{farmId}/year/{year}/price": {
+            "get": {
+                "tags": [
+                    "Milk Production Management"
+                ],
+                "summary": "Obter Valores de Produção de Leite por Ano de uma Fazenda",
+                "parameters": [
+                    {
+                        "name": "farmId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produção de leite encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MilkProductionPricePaidToFarmerByYear"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Fazenda não encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
