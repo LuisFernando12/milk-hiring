@@ -32,11 +32,11 @@ Para rodar o projeto, siga os passos abaixo:
 
 3.  **Configure as variáveis de ambiente no arquivo `.env`:**
 
-        ```dotenv
+       ```dotenv
         PORT= # Porta na qual o projeto será executado
         MONGO_URI= '' #URI de conexão com Mongo
         MONGODB_DATABASE='' # Banco no qual deseja se conectar no Mongo
-     ```
+       ```
 
 4.  **Instale as dependências:**
 
